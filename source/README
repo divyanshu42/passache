@@ -1,0 +1,32 @@
+
+Kelly's Passage Retreival System
+by Kelly Itakura (kelly.itakura@gmail.com)
+
+==Algorithm==
+This implements a passage retreival algorithm, where all possible
+arbitrary passages are ranked using OkapiBM25, and then overlaps 
+eliminated. The results are the set of passages starting and ending
+in keywords because otherwise the OKapi score would be lower.
+
+Passage overlaps are eliminated because of the assumption that 
+users do not want to read the same text over and over.
+Say from the highest scored to the lowest scored, we had three
+passages (1,4), (2,5), (5,6), where the numbers in the brackets denote
+word positions in the corpus. Then (2,5) is eliminated because it 
+overlaps (1,4), but (5,6) is not eliminated because it does not overlap
+(1,4), and (2,5) is already eliminated from the ranked list.
+
+==System Requirement==
+It was developed on a *nix system using Perl and C++, you may need to intsall
+a Perl module, Getopt::Long;, from CPAN.
+
+==How to Run==
+1. "setup.perl" --only needs to be run once.
+It downloads, configures, and installs, the underlying system Wumpus search engine developped by Stefan Büttcher: http://www.wumpus-search.org/. 
+After this it installs the Wikipedia corpus and index the corpus by 
+the Wumpus search system.
+
+2. "run.perl" 
+It can be used as a single-run system without training, or can be passed 
+parameters k, b, etc. to train the system. Training obviously gives better
+results. 
